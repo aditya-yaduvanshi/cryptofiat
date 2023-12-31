@@ -4,5 +4,8 @@ import Icons from 'unplugin-icons/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), Icons({ autoInstall: true, compiler: 'jsx' })],
+  plugins: [
+    react(),
+    Icons({ autoInstall: true, compiler: 'jsx', jsx: 'react' }),
+  ],
 });
