@@ -21,7 +21,7 @@ const CurrencyCard = ({
     <>
       <label
         htmlFor={`${type}-currency-${id}-${name}`}
-        className="flex items-center gap-2.5 border rounded py-2.5 px-5 col-span-2 sm:col-span-1 cursor-pointer hover:bg-gray-100"
+        className="flex items-center gap-2.5 border rounded py-2.5 px-5 col-span-2 sm:col-span-1 transition-all duration-200 active:scale-90 cursor-pointer hover:bg-gray-100"
       >
         {type === 'crypto' ? (
           <img src={logo} alt={name} className="w-14 h-14 rounded-full" />
