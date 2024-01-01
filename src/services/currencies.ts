@@ -1,4 +1,5 @@
 import { GET_CONVERSION_RATE_PATH, LIST_CURRENCIES_PATH } from '../consts/urls';
+import type { ConversionInput } from '../types';
 
 export const listCurrencies = async () => {
   try {
@@ -10,15 +11,11 @@ export const listCurrencies = async () => {
   }
 };
 
-export const getConversionRate = async ({
+export const getCryptoToFiatConversion = async ({
   source,
   amount,
   target,
-}: {
-  source: string;
-  amount: number;
-  target: string;
-}) => {
+}: ConversionInput) => {
   try {
     const res = await fetch(
       `${GET_CONVERSION_RATE_PATH}?source=${source}&amount=${amount}&target=${target}`
