@@ -6,7 +6,7 @@ const useLocalStorage = <T>(
   initialValue: T
 ): [value: T, setValue: React.Dispatch<React.SetStateAction<T>>] => {
   const getStoredValue = useCallback(() => {
-    const item = localStorage.getItem(key);
+    const item = localStorage.getItem(`${APP_PREFIX}:${key}`);
     return item ? JSON.parse(item) : initialValue;
   }, [key, initialValue]);
 
