@@ -15,6 +15,7 @@ type IConversionContext = {
   addNewConversion: (conversion: Conversion) => void;
   getConversionRate: (conversionInput: ConversionInput) => Promise<number>;
   removeConversion: (id: number) => void;
+  syncConversion: (conversion: Conversion) => Promise<void>;
   isLoadingConversion: boolean;
 };
 
@@ -45,6 +46,24 @@ const ConversionProvider = ({ children }: PropsWithChildren) => {
     []
   );
 
+  const syncConversion = useCallback(
+    async (conversion: Conversion) => {
+      const rate = await getConversionRate({
+        source: conversion.source.symbol,
+        target: conversion.target.symbol,
+        amount: conversion.amount,
+      });
+      setConversions((prev) =>
+        prev.map((conv) =>
+          conv.id === conversion.id
+            ? { ...conv, rate, lastSynced: Date.now() }
+            : conv
+        )
+      );
+    },
+    [getConversionRate]
+  );
+
   const removeConversion = useCallback((id: number) => {
     setConversions((prev) => prev.filter((conversion) => conversion.id !== id));
   }, []);
@@ -57,6 +76,7 @@ const ConversionProvider = ({ children }: PropsWithChildren) => {
           addNewConversion,
           getConversionRate,
           removeConversion,
+          syncConversion,
           isLoadingConversion,
         }}
       >
