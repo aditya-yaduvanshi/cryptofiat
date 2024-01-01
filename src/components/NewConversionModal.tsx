@@ -8,6 +8,7 @@ import useCurrencies from '../hooks/useCurrencies';
 import CurrencyCard from './CurrencyCard';
 import type { Conversion } from '../types';
 import { useConversionRates } from '../contexts/conversion';
+import ConversionCard from './ConversionCard';
 
 type NewConversionModalProps = Pick<ModalProps, 'isShow' | 'onClose'>;
 
@@ -82,6 +83,7 @@ const NewConversionModal = ({ isShow, onClose }: NewConversionModalProps) => {
         setConversion((prev) => ({
           ...prev,
           rate,
+          id: Date.now(),
           lastSynced: Date.now(),
         }));
         setStep('rate');
@@ -206,7 +208,10 @@ const NewConversionModal = ({ isShow, onClose }: NewConversionModalProps) => {
                 </>
               )}
               {step === 'amount' && (
-                <>
+                <div className="col-span-2 relative">
+                  <span className="inline-flex justify-center items-center absolute right-5 top-1/2 -translate-y-1/2 rounded-full text-2xl font-bold w-16 aspect-square">
+                    {conversion?.source?.symbol}
+                  </span>
                   <input
                     type="number"
                     placeholder="250"
@@ -216,11 +221,15 @@ const NewConversionModal = ({ isShow, onClose }: NewConversionModalProps) => {
                         amount: Number(e.target.value),
                       }))
                     }
-                    className="h-20 border col-span-2 px-5 text-3xl rounded outline-none hover:border-blue-700 focus:border-2 focus:border-blue-700"
+                    className="h-20 border-2 w-full pr-24 pl-5 text-3xl rounded outline-none hover:border-blue-700 focus:border-blue-700"
                   />
-                </>
+                </div>
               )}
-              {step === 'rate' && <>{conversion?.rate}</>}
+              {step === 'rate' && (
+                <ul className="col-span-2 flex justify-center items-center">
+                  <ConversionCard conversion={conversion as Conversion} />
+                </ul>
+              )}
             </div>
           )}
         </div>
