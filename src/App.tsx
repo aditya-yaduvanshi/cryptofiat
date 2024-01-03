@@ -5,12 +5,12 @@ import Index from './pages/index';
 const App = () => {
   return (
     <>
-      <div className="w-screen h-screen overflow-hidden">
+      <div className="w-screen h-screen overflow-hidden bg-[url(icon.svg)] bg-repeat bg-center">
         <Header />
         <Index />
       </div>
     </>
   );
-};
+};  
 
 export default React.memo(App);

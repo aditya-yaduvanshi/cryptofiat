@@ -15,7 +15,7 @@ const ConversionCard = ({
 }) => {
   return (
     <>
-      <li className="flex flex-col justify-center items-center hover:border-blue-700 transition-all duration-all col-span-1 gap-5 border rounded h-fit w-full p-2.5">
+      <li className="flex flex-col justify-center items-center bg-white hover:border-blue-700 transition-all duration-all col-span-1 gap-5 border rounded h-fit w-full p-2.5">
         <div className="w-full flex items-center justify-between text-xs">
           <p className="flex flex-col">
             <span className="font-semibold">Created At</span>
